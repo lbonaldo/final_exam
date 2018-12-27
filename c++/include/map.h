@@ -2,6 +2,8 @@
 #define MAP_H
 
 #include <memory>
+#include <map>
+#include <stack>
 
 /*
 	class map, declared here, is a binary tree
@@ -22,10 +24,10 @@ class map
 {
 	/*
 		todo:
-		- class map::node
+		(ok) class map::node
 		- class map::iterator
 		- class map::const_iterator
-		- insert()
+		(ok) insert()
 		- clear()
 		- begin()
 		- end()
@@ -64,11 +66,13 @@ class map
 		const key_type&,
 		const std::shared_ptr<node>&) const noexcept;
 
+
 	public:
 	
 	class iterator;
 	class const_iterator;
 	
+	int check();
 	void insert(const std::pair<const key_type,value_type>&);
 };
 

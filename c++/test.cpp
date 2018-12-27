@@ -16,9 +16,27 @@ int test_api(){
 	
 	map<int,int> M;
 
+	/* todo: check that map works
+		for any class key_type with operator< */
+		
 	M.insert(make_pair(1,1));
 
 	return 0;
+}
+
+
+/*
+	This function tests the topology of the tree.
+	It reveals errors at runtime.
+*/
+int test_topology(){
+	debug_call();
+	
+	map<int,int> M;
+	
+	// todo: make some test cases
+
+	return M.check();
 }
 
 int main(){
@@ -26,6 +44,7 @@ int main(){
 	try {
 		
 		cout << ( test_api()==0 ? "OK" : "ERROR" ) << endl;
+		cout << ( test_topology()==0 ? "OK" : "ERROR" ) << endl;
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";

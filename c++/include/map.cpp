@@ -80,3 +80,42 @@ void map<key_type,value_type>::insert(
 		i->right.reset( new node(p,i));
 	// else; do nothing
 }
+
+/*
+	This method is for debuging purposes.
+	It tests if the topology of the tree satisfies 
+	the rules of a binary search tree.
+*/
+template<class key_type, class value_type> 
+int map<key_type,value_type>::check()
+{
+	std::map<key_type,bool> visited;
+	std::stack< std::shared_ptr<node> > s;
+	
+	if(root!=nullptr) s.push(root);
+	
+	while(not s.empty()){
+		auto r = s.top();
+		s.pop();
+		
+		if(visited[r->key()])
+			return 1; // backedge discovered! This is not a tree.
+			
+		visited[r->key()]=true;
+		
+		if(r->left != nullptr){
+			if(not (r->left->key() < r->key()))
+				return 1; // invalid left node
+			
+			s.push(r->left);
+		}
+		if(r->right != nullptr){
+			if(not (r->key() < r->right->key()))
+				return 1; // invalid right node
+			
+			s.push(r->right);
+		}
+	}
+	
+	return 0;
+}
