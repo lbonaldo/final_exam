@@ -3,7 +3,7 @@
 */
 
 template<class key_type,class value_type>
-map<key_type,value_type>::node
+class map<key_type,value_type>::node
 {
 
 	/*
@@ -19,11 +19,17 @@ map<key_type,value_type>::node
 	std::weak_ptr<node> parent; // the parent node owns the child, not the other way around, that's why we use weak_ptr here.
 	std::shared_ptr<node> left,right;
 	std::pair<const key_type,value_type> data;
-	
-	node(	const key_type& k,
-			const value_type& v,
+
+	friend map<key_type,value_type>;
+
+	public:
+
+	node(	const std::pair<const key_type&,value_type>& kv,
 			const std::shared_ptr<node>& p):
-		parent(p), data(k,v) {}
+		parent(p), data(kv) {}
+		
+	node(	const std::pair<const key_type&,value_type>& kv):
+		data(kv) {}
 	
 	const key_type& key() noexcept {
 		return data.first;
