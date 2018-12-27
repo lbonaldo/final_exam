@@ -1,0 +1,3 @@
+/*
+	Map class implemented here.
+*/
