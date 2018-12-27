@@ -5,6 +5,11 @@
 using std::cout;
 using std::endl;
 
+/*
+	This function tests the public programming interface
+	of the class map.
+	It is meant to reveal errors at compile time.
+*/
 int test_template(){
 	debug_call();
 	
