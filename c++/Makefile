@@ -6,8 +6,11 @@ default: test.x
 
 test.x: test.cpp $(map_files)
 	g++ $< -o $@ $(FLAGS)
-	
+
+test:
+	./test.x
+
 clean:
 	rm *.x
 	
-PHONY: clean default
+PHONY: clean default test
