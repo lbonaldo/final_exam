@@ -6,6 +6,19 @@ using std::cout;
 using std::endl;
 using std::make_pair;
 
+std::default_random_engine G(time(NULL));
+
+class value_example {};
+
+class key_example {
+	double k;
+	public:
+	key_example(const double& _k): k(_k){}
+	bool operator < (const key_example& that) const {
+		return k < that.k ;
+	}
+};
+
 /*
 	This function tests the public programming interface
 	of the class map.
@@ -14,12 +27,18 @@ using std::make_pair;
 int test_api(){
 	debug_call();
 	
-	map<int,int> M;
-
-	/* todo: check that map works
-		for any class key_type with operator< */
-		
-	M.insert(make_pair(1,1));
+	map<key_example,value_example> M;
+	std::uniform_real_distribution<double> rn(0.0,1.0);
+	
+	int n=100;
+	
+	while(n--)
+		M.insert(
+			make_pair(
+				key_example(rn(G)),
+				value_example()));
+	
+	
 
 	return 0;
 }
@@ -32,9 +51,14 @@ int test_api(){
 int test_topology(){
 	debug_call();
 	
+	std::uniform_int_distribution<int> rn(1,1000'000'000);
 	map<int,int> M;
 	
-	// todo: make some test cases
+	if(M.check())
+		return 1;
+	
+	for(int i=0;i<100'000;i++)
+		M.insert(make_pair(rn(G),rn(G)));
 
 	return M.check();
 }
