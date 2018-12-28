@@ -55,8 +55,9 @@ class map
 	
 	private:
 
-
 	class node;
+	class base_iterator; 
+	
 	std::shared_ptr<node> root;
 
 	auto smallest_at(

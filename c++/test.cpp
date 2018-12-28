@@ -39,12 +39,22 @@ int test_topology(){
 	return M.check();
 }
 
+/*
+	This function tests the iterators' interface.
+*/
+int test_iterator(){
+	debug_call();
+	// todo: test 'iterator' and 'const_iterator'
+	return 0;
+}
+
 int main(){
 	
 	try {
 		
 		cout << ( test_api()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_topology()==0 ? "OK" : "ERROR" ) << endl;
+		cout << ( test_iterator()==0 ? "OK" : "ERROR" ) << endl;
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";
