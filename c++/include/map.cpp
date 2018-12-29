@@ -81,11 +81,15 @@ void map<key_type,value_type>::insert(
 	// else; do nothing
 }
 
+
+
+#ifndef NDEBUG
 /*
 	This method is for debuging purposes.
 	It tests if the topology of the tree satisfies 
 	the rules of a binary search tree.
 */
+
 template<class key_type, class value_type> 
 int map<key_type,value_type>::check()
 {
@@ -119,3 +123,31 @@ int map<key_type,value_type>::check()
 	
 	return 0;
 }
+/*
+	This method is for debuging purposes.
+	It helps visualizing the tree by printing
+	all of the edges.
+*/
+
+template<class key_type, class value_type> 
+void map<key_type,value_type>::print() {
+	std::stringstream ss;
+	std::queue< std::shared_ptr<node> > Q;
+	
+	std::cout<<"Vertexes:\n";
+	Q.push(root);
+	while(not Q.empty()){
+		auto p = Q.front();
+		Q.pop();
+		if(p==nullptr) continue;
+		std::cout<< p->key() <<": " << p->value() << "\n";
+		Q.push(p->left);
+		Q.push(p->right);
+	
+		auto par = p->parent.lock();
+		if(par != nullptr)
+			ss << par->key() << " - " << p->key() << "\n";
+	}
+	std::cout << "\n\nEdges:\n" << ss.str() << std::endl;
+}
+#endif

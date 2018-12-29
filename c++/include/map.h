@@ -4,6 +4,9 @@
 #include <memory>
 #include <map>
 #include <stack>
+#include <queue>
+#include <iostream>
+#include <sstream>
 
 /*
 	class map, declared here, is a binary tree
@@ -25,21 +28,23 @@ class map
 	/*
 		todo:
 		(ok) class map::node
-		- class map::iterator
+		(ok) class map::iterator
 		- class map::const_iterator
 		(ok) insert()
 		- clear()
-		- begin()
-		- end()
+		(ok) begin()
+		(ok) end()
 		- cbegin()
 		- cend()
 		- balance()
 		- find()
 		- operator []
-		- copy semantics
-		- move semantics
 		- class map::exception
 		- operator << 
+		- copy constructor
+		- copy assignment
+		- move constructor
+		- move assignment
 		
 		test:
 		- no memory leaks
@@ -73,8 +78,20 @@ class map
 	class iterator;
 	class const_iterator;
 	
-	int check();
 	void insert(const std::pair<const key_type,value_type>&);
+	
+	iterator begin() const{
+		return iterator(smallest_at(root));
+	}
+	iterator end() const {
+		return iterator();
+	}
+
+	#ifndef NDEBUG
+	// debuggin functions
+	int check();
+	void print();
+	#endif
 };
 
 

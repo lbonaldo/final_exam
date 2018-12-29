@@ -30,15 +30,13 @@ int test_api(){
 	map<key_example,value_example> M;
 	std::uniform_real_distribution<double> rn(0.0,1.0);
 	
-	int n=100;
+	int n=10;
 	
 	while(n--)
 		M.insert(
 			make_pair(
 				key_example(rn(G)),
 				value_example()));
-	
-	
 
 	return 0;
 }
@@ -68,7 +66,45 @@ int test_topology(){
 */
 int test_iterator(){
 	debug_call();
-	// todo: test 'iterator' and 'const_iterator'
+	// todo: test 'const_iterator'
+	
+	int N=100;
+	std::uniform_int_distribution<int> rn(1,1000);
+	
+	map<int,int> M;
+	std::map<int,int> sM;
+	
+	for(int i=0;i<N;i++){
+		int k=rn(G),v=rn(G);
+		 M.insert(make_pair(k,v));
+		sM.insert(make_pair(k,v));
+	}
+	
+	std::stringstream std_s, star_s,arrow_s,auto_s;
+	
+	for(auto x: sM)
+		std_s << x.first << " " << x.second << "\n";
+	
+	for(auto x: M)
+		auto_s << x.first << " " << x.second << "\n";
+		
+	for(auto x=M.begin();x!=M.end();++x)
+		arrow_s << x->first << " " << x->second << "\n";
+	
+	for(auto x=M.begin();x!=M.end();++x)
+		star_s << (*x).first << " " << (*x).second << "\n";
+		
+	if(auto_s.str() != std_s.str())return 1;	
+	if(star_s.str() != std_s.str())return 1;	
+	if(arrow_s.str()!= std_s.str())return 1;	
+	
+	for(auto x=M.begin();x!=M.end();++x){
+		//x->first = 0; // compile error: the key is const
+		x->second = 0; 
+		//(*x).first = 0; // compile error: the key is const
+		(*x).second = 0; 
+	}
+		
 	return 0;
 }
 
