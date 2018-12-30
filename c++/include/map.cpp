@@ -81,6 +81,28 @@ void map<key_type,value_type>::insert(
 	// else; do nothing
 }
 
+/*
+*/
+template<class key_type, class value_type> 
+void map<key_type,value_type>::balance()
+{
+	if(root==nullptr) return ;
+	
+	std::vector<std::shared_ptr<node> > V;
+	for(auto i=begin();i!=end();++i) V.emplace_back(i.pnode);
+	
+	clear();
+	
+	std::function< void (int,int) > 
+		frec = [&](int a,int b) -> void {
+			if(b <= a) return ;
+			int m = (a+b)/2;
+			insert(V[m]->data);	
+			frec(a,m);
+			frec(m+1,b);
+		};
+	frec(0,V.size());
+}
 
 
 #ifndef NDEBUG
@@ -131,23 +153,30 @@ int map<key_type,value_type>::check()
 
 template<class key_type, class value_type> 
 void map<key_type,value_type>::print() {
-	std::stringstream ss;
-	std::queue< std::shared_ptr<node> > Q;
+	std::stringstream print_v,print_e;
 	
-	std::cout<<"Vertexes:\n";
-	Q.push(root);
-	while(not Q.empty()){
-		auto p = Q.front();
-		Q.pop();
-		if(p==nullptr) continue;
-		std::cout<< p->key() <<": " << p->value() << "\n";
-		Q.push(p->left);
-		Q.push(p->right);
+	std::function< int(std::shared_ptr<node>)  > 
+		frec = [&](std::shared_ptr<node> x) -> int 
+		{
+			if(x==nullptr) return 0;
+			
+			auto p = x->parent.lock();
+			if(p!=nullptr)
+				print_e << p->key() << " - " << x->key() << "\n";
+			
+			int n=1;
+			n += frec(x->left);
+			n += frec(x->right);
+			print_v << x->key() << ": " << x-> value() 
+					<< " (size = " << n <<")\n";
+					
+			return n;
+		};
+	frec(root);
+
 	
-		auto par = p->parent.lock();
-		if(par != nullptr)
-			ss << par->key() << " - " << p->key() << "\n";
-	}
-	std::cout << "\n\nEdges:\n" << ss.str() << std::endl;
+	std::cout 	<< "Vertexes:\n" << print_v.str() << "\n"
+				<< "Edges:\n"	 << print_e.str() << "\n";
+				
 }
 #endif

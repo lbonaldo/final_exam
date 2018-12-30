@@ -38,6 +38,21 @@ int test_api(){
 				key_example(rn(G)),
 				value_example()));
 
+	for(auto& x: M) x.second = value_example();
+	
+	//M.cbegin();
+	//M.cend();
+	//M.balance();
+	//M.clear();
+	//M.find(key_example(rn(G)));
+	//M[key_example(rn(G))];
+	//std::stringstream s;
+	//s << M ;
+	//map<key_example,value_example> M1 = std::move(M);
+	//M = std::move(M1);
+	//M1 = M;
+	//map<key_example,value_example> M2 = std::move(M1);
+	
 	return 0;
 }
 
@@ -45,6 +60,8 @@ int test_api(){
 /*
 	This function tests the topology of the tree.
 	It reveals errors at runtime.
+	
+	todo: check if the tree is balanced
 */
 int test_topology(){
 	debug_call();
@@ -107,6 +124,7 @@ int test_iterator(){
 		
 	return 0;
 }
+
 
 int main(){
 	

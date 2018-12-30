@@ -36,7 +36,7 @@ class map
 		(ok) end()
 		- cbegin()
 		- cend()
-		- balance()
+		(ok) balance()
 		- find()
 		- operator []
 		- class map::exception
@@ -72,7 +72,6 @@ class map
 		const key_type&,
 		const std::shared_ptr<node>&) const noexcept;
 
-
 	public:
 	
 	class iterator;
@@ -86,6 +85,12 @@ class map
 	iterator end() const {
 		return iterator();
 	}
+
+	void clear(){
+		root.reset();
+	}
+	void balance(); // O(NlogN), very costly operation
+
 
 	#ifndef NDEBUG
 	// debuggin functions
