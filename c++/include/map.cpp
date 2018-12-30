@@ -62,6 +62,8 @@ auto map<key_type,value_type>::search_at(
 	with value 'v'. 
 	Otherwise (if there is already a node with 'k') 
 	do not change anything (its value).
+	
+	Complexity: O(H), where H is the height of the tree.
 */
 template<class key_type, class value_type> 
 void map<key_type,value_type>::insert(
@@ -82,6 +84,8 @@ void map<key_type,value_type>::insert(
 }
 
 /*
+	Complexity: O(N log N), where N is the number of 
+	vertexes (nodes) in the tree.
 */
 template<class key_type, class value_type> 
 void map<key_type,value_type>::balance()
@@ -155,22 +159,18 @@ template<class key_type, class value_type>
 void map<key_type,value_type>::print() {
 	std::stringstream print_v,print_e;
 	
-	std::function< int(std::shared_ptr<node>)  > 
-		frec = [&](std::shared_ptr<node> x) -> int 
+	std::function< void(std::shared_ptr<node>)  > 
+		frec = [&](std::shared_ptr<node> x) -> void
 		{
-			if(x==nullptr) return 0;
+			if(x==nullptr) return;
 			
 			auto p = x->parent.lock();
 			if(p!=nullptr)
 				print_e << p->key() << " - " << x->key() << "\n";
 			
-			int n=1;
-			n += frec(x->left);
-			n += frec(x->right);
-			print_v << x->key() << ": " << x-> value() 
-					<< " (size = " << n <<")\n";
-					
-			return n;
+			frec(x->left);
+			frec(x->right);
+			print_v << x->key() << ": " << x-> value() << "\n";
 		};
 	frec(root);
 
@@ -178,5 +178,27 @@ void map<key_type,value_type>::print() {
 	std::cout 	<< "Vertexes:\n" << print_v.str() << "\n"
 				<< "Edges:\n"	 << print_e.str() << "\n";
 				
+}
+
+/*
+	This method is for debuging purposes.
+*/
+
+template<class key_type, class value_type> 
+bool map<key_type,value_type>::is_balance() {
+	int diff=0;
+	std::function< int(std::shared_ptr<node>)  > 
+		frec = [&](std::shared_ptr<node> x) -> int 
+		{
+			if(x==nullptr) return 0;
+			
+			int n=1,l,r;
+			n += l=frec(x->left);
+			n += r=frec(x->right);
+			diff=std::max(diff,abs(l-r));			
+			return n;
+		};
+	frec(root);
+	return diff <= 1 ;
 }
 #endif

@@ -7,6 +7,8 @@
 #include <queue>
 #include <iostream>
 #include <sstream>
+#include <cmath>
+#include <algorithm>
 
 /*
 	class map, declared here, is a binary tree
@@ -31,7 +33,7 @@ class map
 		(ok) class map::iterator
 		- class map::const_iterator
 		(ok) insert()
-		- clear()
+		(ok) clear()
 		(ok) begin()
 		(ok) end()
 		- cbegin()
@@ -89,13 +91,14 @@ class map
 	void clear(){
 		root.reset();
 	}
-	void balance(); // O(NlogN), very costly operation
+	void balance(); // O(N log N), very costly operation
 
 
 	#ifndef NDEBUG
 	// debuggin functions
 	int check();
 	void print();
+	bool is_balance();
 	#endif
 };
 

@@ -2,6 +2,10 @@
 #include "debug.h"
 #include <bits/stdc++.h> // use all the std
 
+/*
+	todo:
+*/
+
 using std::cout;
 using std::endl;
 using std::make_pair;
@@ -42,8 +46,7 @@ int test_api(){
 	
 	//M.cbegin();
 	//M.cend();
-	//M.balance();
-	//M.clear();
+	M.balance();
 	//M.find(key_example(rn(G)));
 	//M[key_example(rn(G))];
 	//std::stringstream s;
@@ -53,6 +56,7 @@ int test_api(){
 	//M1 = M;
 	//map<key_example,value_example> M2 = std::move(M1);
 	
+	M.clear();
 	return 0;
 }
 
@@ -97,7 +101,7 @@ int test_iterator(){
 		sM.insert(make_pair(k,v));
 	}
 	
-	std::stringstream std_s, star_s,arrow_s,auto_s;
+	std::stringstream std_s, star_s,arrow_s,auto_s,const_arrow_s,const_star_s;
 	
 	for(auto x: sM)
 		std_s << x.first << " " << x.second << "\n";
@@ -110,10 +114,22 @@ int test_iterator(){
 	
 	for(auto x=M.begin();x!=M.end();++x)
 		star_s << (*x).first << " " << (*x).second << "\n";
-		
+	
+	/* todo:
+	for(auto x=M.cbegin();x!=M.cend();++x)
+		const_arrow_s << x->first << " " << x->second << "\n";
+	
+	for(auto x=M.cbegin();x!=M.cend();++x)
+		const_star_s << (*x).first << " " << (*x).second << "\n";
+	*/
 	if(auto_s.str() != std_s.str())return 1;	
 	if(star_s.str() != std_s.str())return 1;	
 	if(arrow_s.str()!= std_s.str())return 1;	
+	
+	/* todo:
+	if(const_star_s.str() != std_s.str())return 1;	
+	if(const_arrow_s.str()!= std_s.str())return 1;	
+	*/
 	
 	for(auto x=M.begin();x!=M.end();++x){
 		//x->first = 0; // compile error: the key is const
@@ -121,10 +137,47 @@ int test_iterator(){
 		//(*x).first = 0; // compile error: the key is const
 		(*x).second = 0; 
 	}
-		
+	
+	/* todo:
+	for(auto x=M.cbegin();x!=M.cend();++x){
+		//x->first = 0; // compile error: x is a const_iterator
+		//x->second = 0;// compile error: x is a const_iterator
+		//(*x).first = 0; // compile error: x is a const_iterator
+		//(*x).second = 0; // compile error: x is a const_iterator
+	}
+	*/
 	return 0;
 }
 
+
+int test_balance(){
+	debug_call();
+	
+	int N=100;
+	std::uniform_int_distribution<int> rn(1,1000);
+	
+	map<int,int> M;
+	std::map<int,int> sM;
+	
+	for(int i=0;i<N;i++){
+		int k=rn(G),v=rn(G);
+		 M.insert(make_pair(k,v));
+		sM.insert(make_pair(k,v));
+	}
+	M.balance();	
+	std::stringstream std_s, my_s;
+	
+	for(auto x: sM)
+		std_s << x.first << " " << x.second << "\n";
+	
+	for(auto x: M)
+		my_s << x.first << " " << x.second << "\n";
+	
+		
+	if(my_s.str() != std_s.str() or not M.is_balance())return 1;	
+
+	return 0;
+}
 
 int main(){
 	
@@ -133,6 +186,7 @@ int main(){
 		cout << ( test_api()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_topology()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_iterator()==0 ? "OK" : "ERROR" ) << endl;
+		cout << ( test_balance()==0 ? "OK" : "ERROR" ) << endl;
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";

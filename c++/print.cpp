@@ -30,18 +30,7 @@ int test_topology(){
 	M.insert(make_pair(7, 8));
 	M.insert(make_pair(13,9));
 	M.print();
-	
-	cout<<"\n\n";
-	M.clear();
-	
 		
-	std::uniform_int_distribution<int> rn(1,100);
-	for(int i=0;i<10;i++)
-		M.insert(make_pair(rn(G),0));
-	
-	M.balance();
-	M.print();
-	
 	return M.check();
 }
 
