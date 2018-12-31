@@ -39,7 +39,7 @@ class map
 		- cbegin()
 		- cend()
 		(ok) balance()
-		- find()
+		(ok) find()
 		- operator []
 		- class map::exception
 		- operator << 
