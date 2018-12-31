@@ -3,9 +3,6 @@
 #include <bits/stdc++.h> // use all the std
 
 
-// if and only if:
-#define iff(a,b) ( ((a) and (b)) or (!(a) and !(b)) )
-
 /*
 	todo:
 */
@@ -184,12 +181,12 @@ int test_balance(){
 
 int test_find(){
 	debug_call();
-	int N = 100'000;
-	std::uniform_int_distribution<int> rn(1,1000'000);
+	int N = 100'000,Nmax=1000'000;
+	std::uniform_int_distribution<int> rn(1,Nmax);
 	map<int,int> M;
 	std::map<int,int>sM;
 	
-//	sM.insert(make_pair(4,23)); error
+//	sM.insert(make_pair(4,23));  //error
 	
 	for(int i=0;i<N;i++){
 		int k=rn(G),v=rn(G);
@@ -198,18 +195,16 @@ int test_find(){
 	}
 
 
-	for(int i=0;i<N;i++){
-		int k=rn(G);
+	for(int k=1;k<=Nmax;k++){
 		auto it = M.find(k);
 		auto sit = sM.find(k);
 		
-		if( not iff( it==M.end(), sit==sM.end()  )  )
+		if( (it==M.end()) ^ (sit==sM.end()) ) // if and only if
 			return 1; 
 		
 		if(it==M.end())continue;
 		
-		if( it->first!=sit->first or it->second!=sit->second  )
-			return 1;
+		if( it->first!=sit->first or it->second!=sit->second  )return 1;
 	}
 	
 	return 0;
