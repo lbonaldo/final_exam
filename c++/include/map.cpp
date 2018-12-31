@@ -108,6 +108,19 @@ void map<key_type,value_type>::balance()
 	frec(0,V.size());
 }
 
+/*
+*/
+template<class key_type, class value_type> 
+class map<key_type,value_type>::iterator
+	map<key_type,value_type>::find(const key_type& k) const noexcept 
+{
+	auto i = search_at(k,root);
+	
+	if(i==nullptr or i->key() < k or k < i->key())
+		return iterator();
+	
+	return iterator(i);
+}
 
 #ifndef NDEBUG
 /*

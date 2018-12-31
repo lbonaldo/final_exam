@@ -93,6 +93,8 @@ class map
 	}
 	void balance(); // O(N log N), very costly operation
 
+	iterator find(const key_type&) const noexcept;
+
 
 	#ifndef NDEBUG
 	// debuggin functions

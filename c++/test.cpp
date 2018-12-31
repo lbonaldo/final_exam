@@ -2,6 +2,10 @@
 #include "debug.h"
 #include <bits/stdc++.h> // use all the std
 
+
+// if and only if:
+#define iff(a,b) ( ((a) and (b)) or (!(a) and !(b)) )
+
 /*
 	todo:
 */
@@ -47,7 +51,7 @@ int test_api(){
 	//M.cbegin();
 	//M.cend();
 	M.balance();
-	//M.find(key_example(rn(G)));
+	M.find(key_example(rn(G)));
 	//M[key_example(rn(G))];
 	//std::stringstream s;
 	//s << M ;
@@ -65,7 +69,6 @@ int test_api(){
 	This function tests the topology of the tree.
 	It reveals errors at runtime.
 	
-	todo: check if the tree is balanced
 */
 int test_topology(){
 	debug_call();
@@ -179,6 +182,39 @@ int test_balance(){
 	return 0;
 }
 
+int test_find(){
+	debug_call();
+	int N = 100'000;
+	std::uniform_int_distribution<int> rn(1,1000'000);
+	map<int,int> M;
+	std::map<int,int>sM;
+	
+//	sM.insert(make_pair(4,23)); error
+	
+	for(int i=0;i<N;i++){
+		int k=rn(G),v=rn(G);
+		M.insert(make_pair(k,v));
+		sM.insert(make_pair(k,v));
+	}
+
+
+	for(int i=0;i<N;i++){
+		int k=rn(G);
+		auto it = M.find(k);
+		auto sit = sM.find(k);
+		
+		if( not iff( it==M.end(), sit==sM.end()  )  )
+			return 1; 
+		
+		if(it==M.end())continue;
+		
+		if( it->first!=sit->first or it->second!=sit->second  )
+			return 1;
+	}
+	
+	return 0;
+}
+
 int main(){
 	
 	try {
@@ -187,6 +223,7 @@ int main(){
 		cout << ( test_topology()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_iterator()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_balance()==0 ? "OK" : "ERROR" ) << endl;
+		cout << ( test_find()==0 ? "OK" : "ERROR" ) << endl;
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";
