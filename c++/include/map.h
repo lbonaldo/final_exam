@@ -88,6 +88,14 @@ class map
 		return iterator();
 	}
 
+	const_iterator cbegin() const noexcept {
+	  return const_iterator(smallest_at(root));
+	}
+
+	const_iterator cend() const noexcept {
+	  return const_iterator();
+	}
+  
 	void clear(){
 		root.reset();
 	}

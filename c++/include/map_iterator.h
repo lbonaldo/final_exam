@@ -58,4 +58,16 @@ class map<key_type,value_type>::iterator :
 	}
 };
 
+template<class key_type,class value_type>
+class map<key_type,value_type>::const_iterator :
+  public base_iterator
+{
+  friend map<key_type,value_type>;
+  
+public:
+  using base_iterator::pnode;
+  const std::pair<const key_type,const value_type>& operator*() const { return pnode->data; }
+  const auto operator->() const { return &(pnode->data); }
+};
+
 #include "map_iterator.cpp"
