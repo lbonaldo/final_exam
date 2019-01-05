@@ -101,6 +101,7 @@ class map
 	void clear(){
 		root.reset();
 	}
+	
 	void balance(); // O(N log N), very costly operation
 
 	iterator find(const key_type&) const noexcept;

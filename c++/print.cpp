@@ -6,7 +6,6 @@ using std::cout;
 using std::endl;
 using std::make_pair;
 
-
 std::default_random_engine G(time(NULL));
 
 /*

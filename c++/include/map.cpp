@@ -78,7 +78,7 @@ void map<key_type,value_type>::insert(
 
 	if( p.first < i->key() )
 		i->left.reset( new node(p,i));
-	else if(i -> key() < p.first )
+	else if(i->key() < p.first )
 		i->right.reset( new node(p,i));
 	// else; do nothing
 }
