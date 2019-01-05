@@ -74,9 +74,10 @@ void map<key_type,value_type>::insert(
 		return ;
 	}
 	auto i = search_at(p.first,root);
-	// todo: if i==nullptr 	throw an exception
+	
+	if( i==nullptr ) throw exception{"Invalid key"};
 
-	if( p.first < i->key() )
+	else if( p.first < i->key() )
 		i->left.reset( new node(p,i));
 	else if(i->key() < p.first )
 		i->right.reset( new node(p,i));

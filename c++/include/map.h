@@ -110,6 +110,11 @@ class map
 
   const auto& operator[](const key_type&) const noexcept;
 
+  class exception {
+    std::string message;
+    exception(const std::string& s) : message{s} {}
+  };
+
 	#ifndef NDEBUG
 	// debuggin functions
 	int check();
