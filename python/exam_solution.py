@@ -1,0 +1,2 @@
+class PostcardList:
+	pass
