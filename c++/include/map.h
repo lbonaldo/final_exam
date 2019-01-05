@@ -106,6 +106,9 @@ class map
 
 	iterator find(const key_type&) const noexcept;
 
+  auto& operator[](const key_type&);
+
+  const auto& operator[](const key_type&) const noexcept;
 
 	#ifndef NDEBUG
 	// debuggin functions

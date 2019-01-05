@@ -215,3 +215,26 @@ bool map<key_type,value_type>::is_balance() {
 	return diff <= 1 ;
 }
 #endif
+
+template<class key_type, class value_type>
+auto& map<key_type,value_type>::operator[](const key_type& k) {
+
+  auto i = find(k);
+
+  if(i.pnode==nullptr or i.pnode->key() < k or k < i.pnode->key())
+    insert(std::make_pair(k,value_type()));
+  
+  return i.pnode->value();
+}
+
+template<class key_type, class value_type>
+const auto& map<key_type,value_type>::operator[](const key_type& k) const noexcept {
+
+  auto i = find(k);
+
+  if(i.pnode==nullptr or i.pnode->key() < k or k < i.pnode->key())
+    insert(std::make_pair(k,value_type()));
+  
+  return i.pnode->value();
+}
+
