@@ -66,7 +66,9 @@ class map<key_type,value_type>::const_iterator :
   
 public:
   using base_iterator::pnode;
-  const std::pair<const key_type,const value_type>& operator*() const { return pnode->data; }
+  using base_iterator::base_iterator;
+  
+  const auto& operator*() const { return pnode->data; }
   const auto operator->() const { return &(pnode->data); }
 };
 

@@ -45,8 +45,8 @@ int test_api(){
 
 	for(auto& x: M) x.second = value_example();
 	
-	//M.cbegin();
-	//M.cend();
+	M.cbegin();
+	M.cend();
 	M.balance();
 	M.find(key_example(rn(G)));
 	//M[key_example(rn(G))];
@@ -115,21 +115,18 @@ int test_iterator(){
 	for(auto x=M.begin();x!=M.end();++x)
 		star_s << (*x).first << " " << (*x).second << "\n";
 	
-	/* todo:
 	for(auto x=M.cbegin();x!=M.cend();++x)
 		const_arrow_s << x->first << " " << x->second << "\n";
 	
 	for(auto x=M.cbegin();x!=M.cend();++x)
 		const_star_s << (*x).first << " " << (*x).second << "\n";
-	*/
+	
 	if(auto_s.str() != std_s.str())return 1;	
 	if(star_s.str() != std_s.str())return 1;	
 	if(arrow_s.str()!= std_s.str())return 1;	
 	
-	/* todo:
 	if(const_star_s.str() != std_s.str())return 1;	
 	if(const_arrow_s.str()!= std_s.str())return 1;	
-	*/
 	
 	for(auto x=M.begin();x!=M.end();++x){
 		//x->first = 0; // compile error: the key is const
@@ -138,14 +135,13 @@ int test_iterator(){
 		(*x).second = 0; 
 	}
 	
-	/* todo:
-	for(auto x=M.cbegin();x!=M.cend();++x){
-		//x->first = 0; // compile error: x is a const_iterator
-		//x->second = 0;// compile error: x is a const_iterator
-		//(*x).first = 0; // compile error: x is a const_iterator
-		//(*x).second = 0; // compile error: x is a const_iterator
-	}
-	*/
+	// for(auto x=M.cbegin();x!=M.cend();++x){
+	// 	x->first = 0; // compile error: x is a const_iterator
+	// 	x->second = 0;// compile error: x is a const_iterator
+	// 	(*x).first = 0; // compile error: x is a const_iterator
+	// 	(*x).second = 0; // compile error: x is a const_iterator
+	// }
+	
 	return 0;
 }
 

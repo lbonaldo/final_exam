@@ -9,6 +9,7 @@
 #include <sstream>
 #include <cmath>
 #include <algorithm>
+#include <functional>
 
 /*
 	class map, declared here, is a binary tree
@@ -31,13 +32,13 @@ class map
 		todo:
 		(ok) class map::node
 		(ok) class map::iterator
-		- class map::const_iterator
+		(ok) class map::const_iterator
 		(ok) insert()
 		(ok) clear()
 		(ok) begin()
 		(ok) end()
-		- cbegin()
-		- cend()
+		(ok) cbegin()
+		(ok) cend()
 		(ok) balance()
 		(ok) find()
 		- operator []
@@ -84,6 +85,7 @@ class map
 	iterator begin() const{
 		return iterator(smallest_at(root));
 	}
+
 	iterator end() const {
 		return iterator();
 	}
