@@ -27,7 +27,7 @@ class map<key_type,value_type>::base_iterator :
 	base_iterator() = default ;
 	
 	auto& operator ++ (){	
-		// todo: if(pnode==nullptr) throw exception
+	  if(pnode==nullptr) throw exception{"Last node, cannot increment."};
 		return next(pnode->key());
 	} 
 	bool operator == (const base_iterator& that) const noexcept {
@@ -49,11 +49,11 @@ class map<key_type,value_type>::iterator :
 
 	public:
 	auto& operator *() const {
-		// todo: if(pnode==nullptr) throw exception
+	        if(pnode==nullptr) throw exception{"Error: null pointer. Cannot derefernce."};
 		return pnode->data;
 	}
 	auto  operator->() const {
-		// todo: if(pnode==nullptr) throw exception
+		if(pnode==nullptr) throw exception{"Error: null pointer. Cannot access the node."};
 		return &(pnode->data);
 	}
 };

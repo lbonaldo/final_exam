@@ -77,7 +77,7 @@ class map<key_type,value_type>::iterator
 	
 	auto i = search_at(p.first,root);
 	
-	//if( i==nullptr ) throw exception{"Invalid key"};
+	if( i==nullptr ) throw exception{"Error: unkwown key."};
 
 	if( p.first < i->key() )
 		i->left.reset( new node(p,i));
@@ -238,7 +238,7 @@ const auto& map<key_type,value_type>::operator[](const key_type& k) const noexce
 
    auto i = find(k);
   
-   //if( i == end() ) throw exception 
+   if( i == end() ) throw exception{"Error: end of the binary tree."};
   
    return i->second;
  }

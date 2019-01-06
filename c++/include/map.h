@@ -41,8 +41,8 @@ class map
 		(ok) cend()
 		(ok) balance()
 		(ok) find()
-		- operator []
-		- class map::exception
+		(error to fix) operator []
+		(to test) class map::exception
 		- operator << 
 		- copy constructor
 		- copy assignment
@@ -110,10 +110,10 @@ class map
 
         const auto& operator[](const key_type&) const noexcept;
 
-  /* class exception { */
-  /*   std::string message; */
-  /*   exception(const std::string& s) : message{s} {} */
-  /* }; */
+        class exception {
+            std::string message;
+            exception(const std::string& s) : message{s} {}
+	};
 
 	#ifndef NDEBUG
 	// debuggin functions

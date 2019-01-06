@@ -40,8 +40,12 @@ int main(){
 		
 		test_topology();
 		
-	}catch(const std::exception& E){
-		cout<< E.what() << "\n";
+	} catch( const std::exception& E ){
+	        cout<< E.what() << "\n";
+		
+	} catch( const map::exception& e ){
+	        std::cerr << e.message << "\n";
+	        return 1;
 	}
 	
 	

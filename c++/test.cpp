@@ -252,10 +252,13 @@ int main(){
 		cout << ( test_find()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_brackets()==0 ? "OK" : "ERROR" ) << endl;
 		
-	}catch(const std::exception& E){
+	} catch( const std::exception& E ){
 		cout<< E.what() << "\n";
+		
+	} catch( const map::exception& e ){
+	        std::cerr << e.message << "\n";
+	        return 1;
 	}
-	
 	
 	return 0;
 }
