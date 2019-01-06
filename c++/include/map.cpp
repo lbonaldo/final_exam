@@ -66,21 +66,26 @@ auto map<key_type,value_type>::search_at(
 	Complexity: O(H), where H is the height of the tree.
 */
 template<class key_type, class value_type> 
-void map<key_type,value_type>::insert(
+class map<key_type,value_type>::iterator
+       map<key_type,value_type>::insert(
 	const std::pair<const key_type,value_type>& p)
 {
 	if(root==nullptr){ // the first insertion
 		root.reset(new node(p));
-		return ;
+		return iterator();
 	}
+	
 	auto i = search_at(p.first,root);
 	
-	if( i==nullptr ) throw exception{"Invalid key"};
+	//if( i==nullptr ) throw exception{"Invalid key"};
 
-	else if( p.first < i->key() )
+	if( p.first < i->key() )
 		i->left.reset( new node(p,i));
+	
 	else if(i->key() < p.first )
 		i->right.reset( new node(p,i));
+
+	return iterator(i);
 	// else; do nothing
 }
 
@@ -222,20 +227,19 @@ auto& map<key_type,value_type>::operator[](const key_type& k) {
 
   auto i = find(k);
 
-  if(i.pnode==nullptr or i.pnode->key() < k or k < i.pnode->key())
-    insert(std::make_pair(k,value_type()));
+  if( i == end() )
+    i = insert(std::make_pair(k,value_type()));
   
-  return i.pnode->value();
+  return i->second;
 }
 
 template<class key_type, class value_type>
 const auto& map<key_type,value_type>::operator[](const key_type& k) const noexcept {
 
-  auto i = find(k);
-
-  if(i.pnode==nullptr or i.pnode->key() < k or k < i.pnode->key())
-    insert(std::make_pair(k,value_type()));
+   auto i = find(k);
   
-  return i.pnode->value();
-}
+   //if( i == end() ) throw exception 
+  
+   return i->second;
+ }
 

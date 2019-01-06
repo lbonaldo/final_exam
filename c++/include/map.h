@@ -80,7 +80,7 @@ class map
 	class iterator;
 	class const_iterator;
 	
-	void insert(const std::pair<const key_type,value_type>&);
+	iterator insert(const std::pair<const key_type,value_type>&);
 	
 	iterator begin() const{
 		return iterator(smallest_at(root));
@@ -106,14 +106,14 @@ class map
 
 	iterator find(const key_type&) const noexcept;
 
-  auto& operator[](const key_type&);
+        auto& operator[](const key_type&);
 
-  const auto& operator[](const key_type&) const noexcept;
+        const auto& operator[](const key_type&) const noexcept;
 
-  class exception {
-    std::string message;
-    exception(const std::string& s) : message{s} {}
-  };
+  /* class exception { */
+  /*   std::string message; */
+  /*   exception(const std::string& s) : message{s} {} */
+  /* }; */
 
 	#ifndef NDEBUG
 	// debuggin functions
