@@ -53,7 +53,7 @@ int test_api(){
 	
 	auto f = [] (const map<key_example,value_example>& X){
 		X[key_example(10)];
-	}
+	};
 	
 	f(M);
 	

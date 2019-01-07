@@ -72,18 +72,21 @@ class map<key_type,value_type>::iterator
 {
 	if(root==nullptr){ // the first insertion
 		root.reset(new node(p));
-		return iterator();
+		return iterator(root);
 	}
 	
 	auto i = search_at(p.first,root);
 	
 	//if( i==nullptr ) throw exception{"Invalid key"};
 
-	if( p.first < i->key() )
+	if( p.first < i->key() ){
 		i->left.reset( new node(p,i));
-	
-	else if(i->key() < p.first )
+		i = i->left;
+	  }
+	else if(i->key() < p.first ){
 		i->right.reset( new node(p,i));
+		i = i->right;
+	}
 
 	return iterator(i);
 	// else; do nothing
@@ -241,5 +244,5 @@ const auto& map<key_type,value_type>::operator[](const key_type& k) const noexce
    //if( i == end() ) throw exception 
   
    return i->second;
- }
+}
 
