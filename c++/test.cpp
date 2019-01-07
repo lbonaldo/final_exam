@@ -3,6 +3,14 @@
 #include <bits/stdc++.h> // use all the std
 
 
+class test_fail : public std::exception {
+	std::string message;
+	public:
+	test_fail(const char* mes): message(mes) {}
+	
+	const char* what() const noexcept { return message.c_str();}
+};
+
 /*
 	todo:
 */
@@ -49,13 +57,13 @@ int test_api(){
 	M.cend();
 	M.balance();
 	M.find(key_example(rn(G)));
-	M[key_example(rn(G))];
+	M[key_example(rn(G))] = value_example(); // use of map::operator[]
 	
 	auto f = [] (const map<key_example,value_example>& X){
 		X[key_example(10)];
 	};
 	
-	f(M);
+	f(M); // use of map::operator[]const
 	
 	//std::stringstream s;
 	//s << M ;
@@ -240,6 +248,78 @@ int test_brackets(){
 	return 0;
 }
 
+bool operator == (const map<int,int>& A,const map<int,int>& B){
+	std::stringstream sa,sb;
+	
+	for(auto p: A)
+		sa << p.first << " " << p.second << "\n";
+		
+	
+	for(auto p: B)
+		sb << p.first << " " << p.second << "\n";
+		
+	return sa.str()==sb.str();
+}
+
+int test_move_copy(){
+	debug_call();
+	int N = 100,Nmax=1000;
+	std::uniform_int_distribution<int> rn(1,Nmax);
+	
+	map<int,int> M_orig;
+	
+	for(int i=0;i<N;i++)
+		M_orig[ rn(G) ] = rn(G);
+	
+	
+	map<int,int> M_copy = M_orig;
+
+	if(not (M_orig == M_copy))
+		throw test_fail("copy ctor did not copy");
+	
+	M_orig[ rn(G)  ] = rn(G);
+	
+	if(M_orig == M_copy)
+		throw test_fail("copy ctor did a shallow copy");
+	
+	M_copy.clear();
+	
+	if( not (M_copy.begin()==M_copy.end()))
+		throw test_fail("clear() did not clear");
+	
+	M_copy = M_orig;
+	
+	if(not (M_orig == M_copy))
+		throw test_fail("copy assignment did not copy");
+	
+	M_orig[ rn(G)  ] = rn(G);
+	
+	if(M_orig == M_copy)
+		throw test_fail("copy assignment did a shallow copy");
+
+	M_copy = M_orig;
+	map<int,int> M_move = std::move(M_orig);
+	
+	if(not (M_orig.begin()==M_orig.end()))
+		throw test_fail("move ctor did not release M_orig");
+		
+	if(not (M_move==M_copy))
+		throw test_fail("move ctor did not populated M_move");
+	
+	M_move.clear();
+	M_orig = M_copy;
+	
+	M_move = std::move(M_orig);
+	
+	if(not (M_orig.begin()==M_orig.end()))	
+		throw test_fail("move assignment did not release M_orig");
+		
+	if(not (M_move==M_copy))
+		throw test_fail("move assignment did not populated M_move");
+	
+
+	return 0;
+}
 
 int main(){
 	
@@ -251,6 +331,7 @@ int main(){
 		cout << ( test_balance()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_find()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_brackets()==0 ? "OK" : "ERROR" ) << endl;
+		cout << ( test_move_copy()==0 ? "OK" : "ERROR" ) << endl;
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";
