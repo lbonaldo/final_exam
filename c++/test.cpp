@@ -49,7 +49,14 @@ int test_api(){
 	M.cend();
 	M.balance();
 	M.find(key_example(rn(G)));
-	//M[key_example(rn(G))];
+	M[key_example(rn(G))];
+	
+	auto f = [] (const map<key_example,value_example>& X){
+		X[key_example(10)];
+	};
+	
+	f(M);
+	
 	//std::stringstream s;
 	//s << M ;
 	//map<key_example,value_example> M1 = std::move(M);
@@ -87,7 +94,6 @@ int test_topology(){
 */
 int test_iterator(){
 	debug_call();
-	// todo: test 'const_iterator'
 	
 	int N=100;
 	std::uniform_int_distribution<int> rn(1,1000);
@@ -135,12 +141,12 @@ int test_iterator(){
 		(*x).second = 0; 
 	}
 	
-	// for(auto x=M.cbegin();x!=M.cend();++x){
+	for(auto x=M.cbegin();x!=M.cend();++x){
 	// 	x->first = 0; // compile error: x is a const_iterator
-	// 	x->second = 0;// compile error: x is a const_iterator
+	//	x->second = 0;// compile error: x is a const_iterator
 	// 	(*x).first = 0; // compile error: x is a const_iterator
 	// 	(*x).second = 0; // compile error: x is a const_iterator
-	// }
+	}
 	
 	return 0;
 }
@@ -206,6 +212,35 @@ int test_find(){
 	return 0;
 }
 
+
+int test_brackets(){
+	debug_call();
+	int N = 100,Nmax=1000;
+	std::uniform_int_distribution<int> rn(1,Nmax);
+	map<int,int> M;
+	std::map<int,int>sM;
+	
+	for(int i=0;i<N;i++){
+		int k=rn(G),v=rn(G);
+		M[k]=v;
+		sM[k]=v;
+	}
+	
+	std::stringstream std_s, my_s;
+	
+	for(auto x: sM)
+		std_s << x.first << " " << x.second << "\n";
+	
+	for(auto x: M)
+		my_s << x.first << " " << x.second << "\n";
+	
+	if(std_s.str() != my_s.str())
+		return 1;
+	
+	return 0;
+}
+
+
 int main(){
 	
 	try {
@@ -215,6 +250,7 @@ int main(){
 		cout << ( test_iterator()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_balance()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_find()==0 ? "OK" : "ERROR" ) << endl;
+		cout << ( test_brackets()==0 ? "OK" : "ERROR" ) << endl;
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";

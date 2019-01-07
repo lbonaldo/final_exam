@@ -41,7 +41,7 @@ class map
 		(ok) cend()
 		(ok) balance()
 		(ok) find()
-		- operator []
+		(ok) operator []
 		- class map::exception
 		- operator << 
 		- copy constructor
@@ -80,7 +80,7 @@ class map
 	class iterator;
 	class const_iterator;
 	
-	void insert(const std::pair<const key_type,value_type>&);
+	iterator insert(const std::pair<const key_type,value_type>&);
 	
 	iterator begin() const{
 		return iterator(smallest_at(root));
@@ -101,10 +101,14 @@ class map
 	void clear(){
 		root.reset();
 	}
+	
 	void balance(); // O(N log N), very costly operation
 
 	iterator find(const key_type&) const noexcept;
 
+        auto& operator[](const key_type&);
+
+        const auto& operator[](const key_type&) const noexcept;
 
 	#ifndef NDEBUG
 	// debuggin functions

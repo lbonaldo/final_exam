@@ -69,7 +69,7 @@ public:
   using base_iterator::base_iterator;
   
   const auto& operator*() const { return pnode->data; }
-  const auto operator->() const { return &(pnode->data); }
+  const auto* operator->() const { return &(pnode->data); }
 };
 
 #include "map_iterator.cpp"
