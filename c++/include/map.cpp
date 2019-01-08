@@ -246,3 +246,43 @@ const auto& map<key_type,value_type>::operator[](const key_type& k) const noexce
    return i->second;
 }
 
+//copy-move semantics intizialized in map.cpp
+
+//copy ctor
+template<class key_type, class value_type>
+map<key_type,value_type>::map(const map& map_source) : root{} {
+
+  for(iterator i = map_source.begin(); i != map_source.end(); ++i)
+    insert(*i);  
+}
+
+//copy assigment
+template<class key_type, class value_type>
+map<key_type,value_type>&
+map<key_type,value_type>::operator=(const map& map_source) {
+  
+  clear();
+  for(iterator i = map_source.begin(); i != map_source.end(); ++i)
+    insert(*i);
+  return *this;
+}
+
+//move ctor
+template<class key_type, class value_type>
+map<key_type,value_type>::map(map&& map_source) noexcept : root{map_source.root}{
+
+  map_source.root = nullptr;
+}
+
+//move assigmnet
+template<class key_type, class value_type>
+map<key_type,value_type>&
+map<key_type,value_type>::operator=(map&& map_source) noexcept {
+
+  clear();
+  root = map_source.root;
+  map_source.root = nullptr;
+
+  return *this;
+}
+

@@ -79,6 +79,9 @@ class map
 	
 	class iterator;
 	class const_iterator;
+
+	//default ctor: empty tree
+        map() : root{nullptr}{}
 	
 	iterator insert(const std::pair<const key_type,value_type>&);
 	
@@ -110,6 +113,20 @@ class map
 
         const auto& operator[](const key_type&) const noexcept;
 
+  //copy-move semantics intizialized in map.cpp
+  
+  //deep copy ctor
+  map(const map& map_source);
+
+  //deep copy assigment
+  map& operator=(const map& map_source);
+
+  //move ctor
+  map(map&& map_source) noexcept;
+
+  //move assigmnet
+  map& operator=(map&& map_source) noexcept;
+	
 	#ifndef NDEBUG
 	// debuggin functions
 	int check();
