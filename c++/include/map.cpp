@@ -250,10 +250,11 @@ const auto& map<key_type,value_type>::operator[](const key_type& k) const noexce
 
 //copy ctor
 template<class key_type, class value_type>
-map<key_type,value_type>::map(const map& map_source) : root{} {
+map<key_type,value_type>::map(const map& map_source) {
 
-  for(iterator i = map_source.begin(); i != map_source.end(); ++i)
-    insert(*i);  
+  for(auto i : map_source)
+    insert(i);
+  balance();
 }
 
 //copy assigment
@@ -262,8 +263,9 @@ map<key_type,value_type>&
 map<key_type,value_type>::operator=(const map& map_source) {
   
   clear();
-  for(iterator i = map_source.begin(); i != map_source.end(); ++i)
-    insert(*i);
+  for(auto i : map_source)
+    insert(i);
+  balance();
   return *this;
 }
 

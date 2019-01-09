@@ -44,15 +44,15 @@ class map
 		(ok) operator []
 		- class map::exception
 		- operator << 
-		- copy constructor
-		- copy assignment
-		- move constructor
-		- move assignment
+		(ok) copy constructor
+		(ok) copy assignment
+		(ok) move constructor
+		(ok) move assignment
 		
 		test:
 		- no memory leaks
-		- the public interface
-		- correctedness against std::map
+		(ok) the public interface
+		(ok) correctedness against std::map
 		- performance of 'find()' in the following cases:
 			- worst case unbalanced tree
 			- balance after calling 'balance()'
