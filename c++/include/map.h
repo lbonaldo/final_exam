@@ -85,19 +85,19 @@ class map
 	
 	iterator insert(const std::pair<const key_type,value_type>&);
 	
-	iterator begin() const{
+	iterator begin() noexcept {
 		return iterator(smallest_at(root));
 	}
 
-	iterator end() const {
+	iterator end()noexcept {
 		return iterator();
 	}
 
-	const_iterator cbegin() const noexcept {
+	const_iterator begin() const noexcept {
 	  return const_iterator(smallest_at(root));
 	}
 
-	const_iterator cend() const noexcept {
+	const_iterator end() const noexcept {
 	  return const_iterator();
 	}
   

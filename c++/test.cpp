@@ -53,14 +53,15 @@ int test_api(){
 
 	for(auto& x: M) x.second = value_example();
 	
-	M.cbegin();
-	M.cend();
 	M.balance();
 	M.find(key_example(rn(G)));
 	M[key_example(rn(G))] = value_example(); // use of map::operator[]
 	
 	auto f = [] (const map<key_example,value_example>& X){
 		X[key_example(10)];
+		X.begin(); // begin() const
+		X.end(); // end() const
+//		map<key_example,value_example>::iterator i = X.begin(); // compilation error
 	};
 	
 	f(M); // use of map::operator[]const
@@ -123,18 +124,27 @@ int test_iterator(){
 	for(auto x: M)
 		auto_s << x.first << " " << x.second << "\n";
 		
-	for(auto x=M.begin();x!=M.end();++x)
+	for(map<int,int>::iterator x=M.begin();x!=M.end();++x)
 		arrow_s << x->first << " " << x->second << "\n";
 	
-	for(auto x=M.begin();x!=M.end();++x)
+	for(map<int,int>::iterator x=M.begin();x!=M.end();++x)
 		star_s << (*x).first << " " << (*x).second << "\n";
 	
-	for(auto x=M.cbegin();x!=M.cend();++x)
-		const_arrow_s << x->first << " " << x->second << "\n";
-	
-	for(auto x=M.cbegin();x!=M.cend();++x)
-		const_star_s << (*x).first << " " << (*x).second << "\n";
-	
+	{
+		const map<int,int>& cM = M;
+		for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
+			const_arrow_s << x->first << " " << x->second << "\n";
+		
+		for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
+			const_star_s << (*x).first << " " << (*x).second << "\n";
+		
+		for(auto x=cM.begin();x!=cM.end();++x){
+		// 	x->first = 0; // compile error: x is a const_iterator
+		//	x->second = 0;// compile error: x is a const_iterator
+		// 	(*x).first = 0; // compile error: x is a const_iterator
+		// 	(*x).second = 0; // compile error: x is a const_iterator
+		}
+	}
 	if(auto_s.str() != std_s.str())return 1;	
 	if(star_s.str() != std_s.str())return 1;	
 	if(arrow_s.str()!= std_s.str())return 1;	
@@ -149,12 +159,7 @@ int test_iterator(){
 		(*x).second = 0; 
 	}
 	
-	for(auto x=M.cbegin();x!=M.cend();++x){
-	// 	x->first = 0; // compile error: x is a const_iterator
-	//	x->second = 0;// compile error: x is a const_iterator
-	// 	(*x).first = 0; // compile error: x is a const_iterator
-	// 	(*x).second = 0; // compile error: x is a const_iterator
-	}
+	
 	
 	return 0;
 }
