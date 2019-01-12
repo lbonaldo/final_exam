@@ -31,11 +31,11 @@ class map<key_type,value_type>::node
 
 	public:
 
-	node(	const std::pair<const key_type&,value_type>& kv,
+	node(const std::pair<const key_type&,value_type>& kv,
 			const std::shared_ptr<node>& p):
 		parent(p), data(kv) {}
 		
-	node(	const std::pair<const key_type&,value_type>& kv):
+	node(const std::pair<const key_type&,value_type>& kv):
 		data(kv) {}
 	
 	const key_type& key() noexcept {

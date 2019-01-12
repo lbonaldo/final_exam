@@ -25,12 +25,36 @@ class value_example {};
 
 class key_example {
 	double k;
-	public:
+
+  public:
 	key_example(const double& _k): k(_k){}
-	bool operator < (const key_example& that) const {
+  const auto& key() const noexcept {
+		return k;
+	}
+        bool operator < (const key_example& that) const {
 		return k < that.k ;
 	}
 };
+
+std::ostream& operator<<(std::ostream& os, const key_example& key){
+  os << key.key();
+  return os;
+}
+
+class value_example_os {
+	double value;
+
+  public:
+	value_example_os(const double& _value): value(_value){}
+        const auto& vle() const noexcept {
+		return value;
+	}
+};
+
+std::ostream& operator<<(std::ostream& os, const value_example_os& value_os){
+  os << value_os.vle();
+  return os;
+}
 
 /*
 	This function tests the public programming interface
@@ -65,15 +89,29 @@ int test_api(){
 	};
 	
 	f(M); // use of map::operator[]const
+
+	//use of operator<<
+	map<key_example,value_example_os> M_double;
+
+	int m = 0;
+	while(m--)
+		M_double.insert(
+			make_pair(
+				key_example(rn(G)),
+				value_example_os(rn(G))));
+			
+	for(auto& x: M_double) x.second = value_example_os(rn(G));
 	
-	//std::stringstream s;
-	//s << M ;
+	std::stringstream s;
+	s << M_double ;
+	
 	//map<key_example,value_example> M1 = std::move(M);
 	//M = std::move(M1);
 	//M1 = M;
 	//map<key_example,value_example> M2 = std::move(M1);
 	
 	M.clear();
+	M_double.clear();
 	return 0;
 }
 
@@ -131,19 +169,19 @@ int test_iterator(){
 		star_s << (*x).first << " " << (*x).second << "\n";
 	
 	{
-		const map<int,int>& cM = M;
-		for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
-			const_arrow_s << x->first << " " << x->second << "\n";
-		
-		for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
-			const_star_s << (*x).first << " " << (*x).second << "\n";
-		
-		for(auto x=cM.begin();x!=cM.end();++x){
-		// 	x->first = 0; // compile error: x is a const_iterator
-		//	x->second = 0;// compile error: x is a const_iterator
-		// 	(*x).first = 0; // compile error: x is a const_iterator
-		// 	(*x).second = 0; // compile error: x is a const_iterator
-		}
+	  const map<int,int>& cM = M;
+	  for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
+	    const_arrow_s << x->first << " " << x->second << "\n";
+	  
+	  for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
+	    const_star_s << (*x).first << " " << (*x).second << "\n";
+	  
+	  for(auto x=cM.begin();x!=cM.end();++x){
+	    // 	x->first = 0; // compile error: x is a const_iterator
+	    //	x->second = 0;// compile error: x is a const_iterator
+	    // 	(*x).first = 0; // compile error: x is a const_iterator
+	    // 	(*x).second = 0; // compile error: x is a const_iterator
+	  }
 	}
 	if(auto_s.str() != std_s.str())return 1;	
 	if(star_s.str() != std_s.str())return 1;	
@@ -345,3 +383,4 @@ int main(){
 	
 	return 0;
 }
+ 
