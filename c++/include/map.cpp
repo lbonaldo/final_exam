@@ -77,7 +77,7 @@ class map<key_type,value_type>::iterator
 	
 	auto i = search_at(p.first,root);
 	
-	//if( i==nullptr ) throw exception{"Invalid key"};
+	//assert(not i==nullptr);
 
 	if( p.first < i->key() ){
 		i->left.reset( new node(p,i));
