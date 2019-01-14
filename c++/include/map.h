@@ -43,7 +43,7 @@ class map
 		(ok) find()
 		(ok) operator []
 		- class map::exception
-		- operator << 
+		(ok) operator << 
 		(ok) copy constructor
 		(ok) copy assignment
 		(ok) move constructor
