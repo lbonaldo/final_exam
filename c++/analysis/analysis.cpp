@@ -125,28 +125,24 @@ int main(int argc, char *argv[]){
     map<int,double> map_id;
     std::cout << "map<int,double>: " << std::endl;
     test(n, iter, map_id);
-    map_id.clear();
   }
   
   {
     map<double,double> map_dd;  
     std::cout << "map<double,double>: " << std::endl;
     test(n, iter, map_dd);
-    map_dd.clear();
   }
     
   {
     map<std::string,double> map_sd;
     std::cout << "map<string,double>: " << std::endl;
     test(n, iter, map_sd);
-    map_sd.clear();
   }
   
   {
     map<std::string,std::string> map_ss;
     std::cout << "map<string,string>: " << std::endl;
     test(n, iter, map_ss);
-    map_ss.clear();
   }
   
   return 0;
