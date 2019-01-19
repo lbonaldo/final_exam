@@ -2,7 +2,12 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <random>
+#include <vector>
 #include <map>
+
+
+std::string random_string_generator(const int length);
 
 std::default_random_engine generator(time(NULL));
 std::uniform_int_distribution<int> ri(0,1000);
@@ -11,21 +16,21 @@ std::uniform_real_distribution<double> rd(0.0,1.0);
 //n is the maximum dimension of the map
 
 template <typename T1, typename T2>
-void test(int& n, int& iter, map<T1,T1>& map){
+void test(const int n, const int& iter, map<T1,T2>& map){
 
-  auto t0, t1, total_time_unbalanced, total_time_balanced, total_time_std;
+  std::chrono::high_resolution_clock::time_point t0, t1, total_time_unbalanced, total_time_balanced, total_time_std;
 
   std::map<T1,T2> map_std;
   
-  std::vector<T1> keys = random_vec_gen(n);
-  std::vector<T2> values = random_vec_gen(n);
+  std::vector<T1> keys = random_vec_gen(n, T1{});
+  std::vector<T2> values = random_vec_gen(n, T2{});
 
-  for(auto i=0; i<n; i++){
+  for(auto i=0; i<n; ++i){
     map.insert(std::make_pair(keys[i],values[i]));
     map_std.std::map::insert(std::make_pair(keys[i],values[i]));
   }
   
-  for(auto i=0; i<iter; i++){
+  for(auto i=0; i<iter; ++i){
     int wanted_key = ri(generator)%n;
     t0 = std::chrono::high_resolution_clock::now();
     map.find(keys[wanted_key]);
@@ -35,7 +40,7 @@ void test(int& n, int& iter, map<T1,T1>& map){
 
   map.balance();
 
-  for(auto i=0; i<iter; i++){
+  for(auto i=0; i<iter; ++i){
     int wanted_key = ri(generator)%n;
     t0 = std::chrono::high_resolution_clock::now();
     map.find(keys[wanted_key]);
@@ -59,36 +64,37 @@ void test(int& n, int& iter, map<T1,T1>& map){
   map_std = clear();
 }
 
-std::string random_string_generator(int length);
+std::vector<int>& random_vec_gen(const int n, const int dummy){
+  (void)dummy;
 
-std::vector<int> random_vec_gen(int n){
-
-  std::vector<int> random_vec = (n);
-  while(n--)
+  std::vector<int> random_vec(n);
+  for(auto i = 0; i<n; ++i)
     random_vec_int.push_back(ri(generator));
 
   return random_vec;
 }
 
-std::vector<double> random_vec_gen(int n){
+std::vector<double>& random_vec_gen(const int n, const double dummy){
+  (void)dummy;
 
-  std::vector<double> random_vec = (n);
-  while(n--)
+  std::vector<double> random_vec(n);
+  for(auto i = 0; i<n; ++i)
     random_vec.push_back(rd(generator));
 
   return random_vec;
 }
 
-std::vector<std::string> random_vec_gen(int n){
+std::vector<std::string>& random_vec_gen(const int n, const std::string& dummy){
+  (void)dummy;
 
-  std::vector<std::string> random_vec = (n);
-  while(n--)
+  std::vector<std::string> random_vec(n);
+  for(auto i = 0; i<n; ++i)
     random_vec.push_back(random_string_generator(5));
   
   return random_vec;
 }
 
-std::string random_string_generator(int length){
+std::string random_string_generator(const int length){
   
   const char alphanum[] =
     "0123456789"
@@ -109,19 +115,21 @@ std::string random_string_generator(int length){
 
 int main(int argc, char *argv[]){
 
+  const iter = argv[1];
+
   map<int,double> map_id;
   map<double,double> map_dd;  
   map<std::string,double> map_sd;
   map<std::string,std::string> map_ss;
 
   std::cout << "map<int,double>: " << std::endl;
-  test(1000, argv[1], map_id);
+  test(1000, iter, map_id);
   std::cout << "map<double,double>: " << std::endl;
-  test(1000, argv[1], map_dd);
+  test(1000, iter, map_dd);
   std::cout << "map<string,double>: " << std::endl;
-  test(1000, argv[1], map_sd);
+  test(1000, iter, map_sd);
   std::cout << "map<string,string>: " << std::endl;
-  test(1000, argv[1], map_ss);
+  test(1000, iter, map_ss);
 
   map_id.clear();
   map_dd.clear();
