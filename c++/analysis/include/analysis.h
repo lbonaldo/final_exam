@@ -8,7 +8,7 @@
 
 std::default_random_engine generator(time(NULL));
 
-std::uniform_int_distribution<int> ri(0,1000);
+std::uniform_int_distribution<int> ri(0,10000);
 std::uniform_real_distribution<double> rd(0.0,1.0);
 std::string random_string_generator(const int length);
 

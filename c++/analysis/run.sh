@@ -9,10 +9,12 @@
 
 cd $PBS_O_WORKDIR
 
-for k in 20 50 100 200 500 1000 1500 2000 3000 5000 10000 15000 20000 30000 50000; do
-    touch ./data/matmul_omp_$k.txt
-    for j in 1 5 10; do
-	./analysis.x $k $j >> ./data/matmul_omp_$k.txt 
-        sleep 3
+for k in 5000 10000 15000 20000 30000 50000 100000 150000 200000; do
+    for j in 50 100 200 500 1000 2000 3000; do
+    touch ./data/bst${k}_${j}.txt
+	for i in $(seq 1 10); do
+	    ./analysis.x $k $j >> ./data/bst${k}_${j}.txt 
+            sleep 3
+	done
     done
 done

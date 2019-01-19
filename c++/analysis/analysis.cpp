@@ -46,15 +46,18 @@ void test(const int& n, const int& iter, map<T1,T2>& map){
   
   std::cout << "Look-up time UNBALANCED MAP: "
 	    << std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()
-	    << " us\n";
+	    << " us Dim: " 
+	    << n << std::endl;
 
   std::cout << "Look-up time BALANCED MAP: "
       << std::chrono::duration_cast<std::chrono::microseconds>(t3 - t2).count()
-	    << " us\n";
+	    << " us Dim: "
+	    << n << std::endl;
 
   std::cout << "Look-up time STD::MAP: "
 	    << std::chrono::duration_cast<std::chrono::microseconds>(t4 - t3).count()
-	    << " us\n";
+	    << " us Dim: "
+	    << n << std::endl;
 
   std::cout << dummy << std::endl;
 }
@@ -64,7 +67,7 @@ std::vector<int> random_gen(const int n, const int dummy){
 
   std::vector<int> random_vec(n);
   for(auto i = 0; i<n; ++i)
-    random_vec.push_back(ri(generator));
+    random_vec[i] = ri(generator);
 
   return random_vec;
 }
@@ -74,7 +77,7 @@ std::vector<double> random_gen(const int n, const double dummy){
 
   std::vector<double> random_vec(n);
   for(auto i = 0; i<n; ++i)
-    random_vec.push_back(rd(generator));
+    random_vec[i] = rd(generator);
 
   return random_vec;
 }
@@ -84,7 +87,7 @@ std::vector<std::string> random_gen(const int n, const std::string& dummy){
 
   std::vector<std::string> random_vec(n);
   for(auto i = 0; i<n; ++i)
-    random_vec.push_back(random_string_generator(5));
+    random_vec[i] = random_string_generator(5);
   
   return random_vec;
 }

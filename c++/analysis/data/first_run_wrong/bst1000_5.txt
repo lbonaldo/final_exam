@@ -1,0 +1,200 @@
+map<int,double>: 
+Look-up time UNBALANCED MAP: 9 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 14 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 15 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 9 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 14 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 16 us Dim: 1000
+Look-up time BALANCED MAP: 1 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 15 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 15 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 15 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 16 us Dim: 1000
+Look-up time BALANCED MAP: 1 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 15 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
+map<int,double>: 
+Look-up time UNBALANCED MAP: 8 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<double,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,double>: 
+Look-up time UNBALANCED MAP: 0 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+10
+map<string,string>: 
+Look-up time UNBALANCED MAP: 16 us Dim: 1000
+Look-up time BALANCED MAP: 0 us Dim: 1000
+Look-up time STD::MAP: 0 us Dim: 1000
+760
