@@ -293,14 +293,10 @@ int test_brackets(){
 
 bool operator == (const map<int,int>& A,const map<int,int>& B){
 	std::stringstream sa,sb;
+
+	sa << A;
+	sb << B;
 	
-	for(auto p: A)
-		sa << p.first << " " << p.second << "\n";
-		
-	
-	for(auto p: B)
-		sb << p.first << " " << p.second << "\n";
-		
 	return sa.str()==sb.str();
 }
 
