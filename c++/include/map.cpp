@@ -288,3 +288,10 @@ map<key_type,value_type>::operator=(map&& map_source) noexcept {
   return *this;
 }
 
+template<class key_type, class value_type>
+std::ostream& operator<<(std::ostream& os, const map<key_type, value_type>& map){
+  for(auto i : map)
+    os << i.first << ": " << i.second << std::endl;
+
+  return os;
+}

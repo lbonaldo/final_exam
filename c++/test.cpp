@@ -1,3 +1,8 @@
+/*
+	todo:
+*/
+
+
 #include "map.h"
 #include "debug.h"
 #include <bits/stdc++.h> // use all the std
@@ -11,26 +16,26 @@ class test_fail : public std::exception {
 	const char* what() const noexcept { return message.c_str();}
 };
 
-/*
-	todo:
-*/
 
 using std::cout;
 using std::endl;
-using std::make_pair;
 
 std::default_random_engine G(time(NULL));
 
-class value_example {};
+class value_example {}; //minimum working class value
 
 class key_example {
-	double k;
-	public:
-	key_example(const double& _k): k(_k){}
-	bool operator < (const key_example& that) const {
+	int k;
+
+  public:
+	key_example(const int _k): k(_k){}
+	
+  bool operator < (const key_example& that) const {
 		return k < that.k ;
 	}
-};
+}; // minimum working class key
+
+
 
 /*
 	This function tests the public programming interface
@@ -41,39 +46,45 @@ int test_api(){
 	debug_call();
 	
 	map<key_example,value_example> M;
-	std::uniform_real_distribution<double> rn(0.0,1.0);
+	std::uniform_int_distribution<int> rn(1,6);
 	
 	int n=10;
-	
+
+	// test insert
 	while(n--)
 		M.insert(
-			make_pair(
-				key_example(rn(G)),
-				value_example()));
+			{key_example(rn(G)),value_example()});
 
+	// test iterator, begin(), end()
 	for(auto& x: M) x.second = value_example();
 	
+	// test balance
 	M.balance();
+	
+	// test find
 	M.find(key_example(rn(G)));
+	
+	// test operator[]
 	M[key_example(rn(G))] = value_example(); // use of map::operator[]
 	
-	auto f = [] (const map<key_example,value_example>& X){
+	
+	// test const_iterator
+	{
+		const map<key_example,value_example>& X = M;
+		
+		// test operator[] const
 		X[key_example(10)];
-		X.begin(); // begin() const
-		X.end(); // end() const
-//		map<key_example,value_example>::iterator i = X.begin(); // compilation error
-	};
-	
-	f(M); // use of map::operator[]const
-	
-	//std::stringstream s;
-	//s << M ;
-	//map<key_example,value_example> M1 = std::move(M);
-	//M = std::move(M1);
-	//M1 = M;
-	//map<key_example,value_example> M2 = std::move(M1);
-	
-	M.clear();
+		
+		// test begin() const
+		X.begin();
+		
+		// test end() const
+		X.end();
+		
+		// compilation error: X.begin() returns const_iterator
+		// map<key_example,value_example>::iterator i = X.begin();
+	}
+
 	return 0;
 }
 
@@ -90,12 +101,15 @@ int test_topology(){
 	map<int,int> M;
 	
 	if(M.check())
-		return 1;
+		throw test_fail("topology fail after default constructor");
 	
 	for(int i=0;i<100'000;i++)
-		M.insert(make_pair(rn(G),rn(G)));
+		M.insert({rn(G),rn(G)});
 
-	return M.check();
+	if(M.check())
+		throw test_fail(" topology fail after insert");
+	
+	return 0;
 }
 
 /*
@@ -112,8 +126,8 @@ int test_iterator(){
 	
 	for(int i=0;i<N;i++){
 		int k=rn(G),v=rn(G);
-		 M.insert(make_pair(k,v));
-		sM.insert(make_pair(k,v));
+		 M.insert({k,v});
+		sM.insert({k,v});
 	}
 	
 	std::stringstream std_s, star_s,arrow_s,auto_s,const_arrow_s,const_star_s;
@@ -131,69 +145,74 @@ int test_iterator(){
 		star_s << (*x).first << " " << (*x).second << "\n";
 	
 	{
-		const map<int,int>& cM = M;
-		for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
-			const_arrow_s << x->first << " " << x->second << "\n";
-		
-		for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
-			const_star_s << (*x).first << " " << (*x).second << "\n";
-		
-		for(auto x=cM.begin();x!=cM.end();++x){
-		// 	x->first = 0; // compile error: x is a const_iterator
-		//	x->second = 0;// compile error: x is a const_iterator
-		// 	(*x).first = 0; // compile error: x is a const_iterator
-		// 	(*x).second = 0; // compile error: x is a const_iterator
-		}
+	  const map<int,int>& cM = M;
+	  for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
+	    const_arrow_s << x->first << " " << x->second << "\n";
+	  
+	  for(map<int,int>::const_iterator x=cM.begin();x!=cM.end();++x)
+	    const_star_s << (*x).first << " " << (*x).second << "\n";
+	  
+	  for(auto x=cM.begin();x!=cM.end();++x){
+	    // 	x->first = 0; // compile error: x is a const_iterator
+	    //	x->second = 0;// compile error: x is a const_iterator
+	    // 	(*x).first = 0; // compile error: x is a const_iterator
+	    // 	(*x).second = 0; // compile error: x is a const_iterator
+	  }
 	}
-	if(auto_s.str() != std_s.str())return 1;	
-	if(star_s.str() != std_s.str())return 1;	
-	if(arrow_s.str()!= std_s.str())return 1;	
 	
-	if(const_star_s.str() != std_s.str())return 1;	
-	if(const_arrow_s.str()!= std_s.str())return 1;	
+	if(auto_s.str() != std_s.str())
+		throw test_fail("auto iterator fail");
+		
+	if(star_s.str() != std_s.str())
+		throw test_fail("iterator::operator*() fail");
+		
+	if(arrow_s.str()!= std_s.str())	
+		throw test_fail("iterator::operator->() fail");
+	
+	if(const_star_s.str() != std_s.str())
+		throw test_fail("const_iterator::operator*() fail");
+		
+	if(const_arrow_s.str()!= std_s.str())	
+		throw test_fail("const_iterator::operator->() fail");
 	
 	for(auto x=M.begin();x!=M.end();++x){
-		//x->first = 0; // compile error: the key is const
+		// x->first = 0; // compile error: the key is const
 		x->second = 0; 
 		//(*x).first = 0; // compile error: the key is const
 		(*x).second = 0; 
-	}
-	
-	
+	}	
 	
 	return 0;
 }
 
-
+/*
+	This function checks if the tree is balanced
+	after calling 'balance()'.
+*/
 int test_balance(){
 	debug_call();
 	
-	int N=100;
-	std::uniform_int_distribution<int> rn(1,1000);
+	int N=100'000;
+	std::uniform_int_distribution<int> rn(1,1000'000);
 	
 	map<int,int> M;
-	std::map<int,int> sM;
 	
 	for(int i=0;i<N;i++){
 		int k=rn(G),v=rn(G);
-		 M.insert(make_pair(k,v));
-		sM.insert(make_pair(k,v));
+		 M.insert({k,v});
 	}
 	M.balance();	
-	std::stringstream std_s, my_s;
-	
-	for(auto x: sM)
-		std_s << x.first << " " << x.second << "\n";
-	
-	for(auto x: M)
-		my_s << x.first << " " << x.second << "\n";
-	
 		
-	if(my_s.str() != std_s.str() or not M.is_balance())return 1;	
+	if(not M.is_balance())
+		throw test_fail("tree not balanced");
 
 	return 0;
 }
 
+
+/*
+	Test 'find()' function
+*/
 int test_find(){
 	debug_call();
 	int N = 100'000,Nmax=1000'000;
@@ -201,31 +220,31 @@ int test_find(){
 	map<int,int> M;
 	std::map<int,int>sM;
 	
-//	sM.insert(make_pair(4,23));  //error
-	
 	for(int i=0;i<N;i++){
 		int k=rn(G),v=rn(G);
-		M.insert(make_pair(k,v));
-		sM.insert(make_pair(k,v));
+		M.insert({k,v});
+		sM.insert({k,v});
 	}
-
 
 	for(int k=1;k<=Nmax;k++){
 		auto it = M.find(k);
 		auto sit = sM.find(k);
 		
 		if( (it==M.end()) ^ (sit==sM.end()) ) // if and only if
-			return 1; 
+			throw test_fail("one found and the other one not");
 		
 		if(it==M.end())continue;
 		
-		if( it->first!=sit->first or it->second!=sit->second  )return 1;
+		if( it->first!=sit->first or it->second!=sit->second  )
+			throw test_fail("keys or values different");
 	}
 	
 	return 0;
 }
 
-
+/*
+	Test 'operator[]'
+*/
 int test_brackets(){
 	debug_call();
 	int N = 100,Nmax=1000;
@@ -248,23 +267,23 @@ int test_brackets(){
 		my_s << x.first << " " << x.second << "\n";
 	
 	if(std_s.str() != my_s.str())
-		return 1;
+		throw test_fail("contents of map is wrong.");
 	
 	return 0;
 }
 
+
+
 bool operator == (const map<int,int>& A,const map<int,int>& B){
 	std::stringstream sa,sb;
-	
-	for(auto p: A)
-		sa << p.first << " " << p.second << "\n";
-		
-	
-	for(auto p: B)
-		sb << p.first << " " << p.second << "\n";
-		
+	sa << A;
+	sb << B;	
 	return sa.str()==sb.str();
 }
+
+/*
+	Test move and copy semantics.
+*/
 
 int test_move_copy(){
 	debug_call();
@@ -309,7 +328,7 @@ int test_move_copy(){
 		throw test_fail("move ctor did not release M_orig");
 		
 	if(not (M_move==M_copy))
-		throw test_fail("move ctor did not populated M_move");
+		throw test_fail("move ctor did not populate M_move");
 	
 	M_move.clear();
 	M_orig = M_copy;
@@ -320,7 +339,7 @@ int test_move_copy(){
 		throw test_fail("move assignment did not release M_orig");
 		
 	if(not (M_move==M_copy))
-		throw test_fail("move assignment did not populated M_move");
+		throw test_fail("move assignment did not populate M_move");
 	
 
 	return 0;
@@ -345,3 +364,4 @@ int main(){
 	
 	return 0;
 }
+ 

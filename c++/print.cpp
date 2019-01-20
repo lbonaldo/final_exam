@@ -28,8 +28,12 @@ int test_topology(){
 	M.insert(make_pair(4, 7));
 	M.insert(make_pair(7, 8));
 	M.insert(make_pair(13,9));
+	
 	M.print();
-		
+
+	cout << "Check overload operator <<" << endl;
+	cout << M << endl;
+	
 	return M.check();
 }
 
