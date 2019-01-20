@@ -15,5 +15,5 @@ print:
 
 clean:
 	rm *.x
-	
+
 PHONY: clean default test print
