@@ -2,92 +2,86 @@ import datetime
 
 class PostcardList():
     
-    def __init__(self):
-        
-        self._file = None
+    def __init__(self): 
+        self._file = str()
         self._postcards = []
         self._date = {}
         self._from = {}
         self._to = {}
         
     def readFile(self, from_file_name):
-        self._file = from_file_name
-        with open(from_file_name, 'r') as file:
-            for line in file:
-                self._postcards.append(line)
-                
-            self.parsePostcards()
+    # from self._file read self.{_date,_from,_to}    
+        self.__init__()
+        self.updateLists(from_file_name)
             
-    def writeFile(self, to_file_name):
-        with open(to_file_name, 'w') as file:
+    def writeFile(self):
+    # write self.{_date,_from,_to} to self._file  
+        f = open(self._file,"w")
+        f.close()
+        self.updateFile()
+        
+
+    def updateFile(self):
+    # updateFile(self,...): as write but appending to self._file 
+        with open(self._file, 'a+') as file:
             for line in self._postcards:
                 file.write(line)
                 
-    def updateFile(self, new_postcards):
-        with open(self._file, 'a+') as file:
-            for line in new_postcards:
-                file.write(line)
-                
     def updateLists(self, from_file_name):
-        new_postcard = []
+    # as read but appending to self._postcards 
+        self._file=from_file_name
         with open(from_file_name, 'r') as file:
             for line in file:  
-                self._postcards.append(line)
-                new_postcard.append(line)
+                n = self.getNumberOfPostcards()
+                self._postcards.append(line) 
+                d,s,r=self.parsePostcards(line)
+                self._add_record(self._date,d,n)
+                self._add_record(self._from,s,n)
+                self._add_record(self._to,r,n)
                 
-            self.parsePostcards()
-            self.updateFile(new_postcard)
+            
+    def _add_record(self,Dic,Str,Ind):
+        if not Str in Dic:
+            Dic[Str]=list()     
+        Dic[Str].append(Ind)
 
-    def parsePostcards(self):
-        dates = []
-        senders = []
-        receivers = []
+    def parsePostcards(self,PC):
+    # parse self._postcards, set self.{_date,_from,_to} 
+        date,alice,bob=PC.split()
+        date=date.split(":")[1].split(";")[0]
+        alice=alice.split(":")[1].split(";")[0]
+        bob=bob.split(":")[1].split(";")[0]
         
-        for postcard in self._postcards:
-            dates.append((postcard.split(";")[0]).split(":")[1])
-            senders.append((postcard.split(";")[1]).split(":")[1])
-            receivers.append((postcard.split(";")[2]).split(":")[1])
-                
-        for i, date in enumerate(dates, 0):
-                if date not in self._date.keys():
-                    self._date[date] = [i]
-                else:
-                    self._date[date].append(i)
-                    
-        for i, sender in enumerate(senders, 0):
-                if sender not in self._from.keys():
-                    self._from[sender] = [i]
-                else:
-                    self._from[sender].append(i)
-                    
-        for i, receiver in enumerate(receivers, 0):
-                if receiver not in self._to.keys():
-                    self._to[receiver] = [i]
-                else:
-                    self._to[receiver].append(i)
-     
+        return (date,alice,bob)
+
     def getNumberOfPostcards(self):
+    # returns length of self._postcards
         return len(self._postcards)
     
     def getPostcardsByDateRange(self, date_range): 
+    # returns the postcards within a date_range
         min_range = date_range[0]
         max_range = date_range[1]
         
         postcard_inrange = []
-        for postcard in self._postcards:
-            date = (postcard.split(";")[0]).split(":")[1]
-            tmp = datetime.datetime.strptime(date, "%Y-%m-%d")
+        for d in self._date:
+            tmp = datetime.datetime.strptime(d, "%Y-%m-%d")
             if tmp >= min_range and tmp <= max_range:
-                postcard_inrange.append(postcard)
+                postcard_inrange +=[self._postcards[i] for i in self._date[d]]
             
         return postcard_inrange
 
     def getPostcardsBySender(self, sender):
-        postcards_from_sender = []
-        for postcard in self._postcards: 
-            if sender == (postcard.split(";")[1]).split(":")[1]:
-                postcards_from_sender.append(postcard)
-        return postcards_from_sender
+        # returns the postcards from a sender
+        pc = []
+        if sender in self._from: 
+            pc = [self._postcards[i] for i in self._from[sender]]
+        return pc
     
     def getPostcardsByReceiver(self, receiver):
-        return [postcard for postcard in self._postcards if receiver == (postcard.split(";")[2]).split(":")[1]]
+        # returns the postcards to a receiver
+        pc = []
+        if receiver in self._to: 
+            pc = [self._postcards[i] for i in self._to[receiver]]
+        return pc
+        
