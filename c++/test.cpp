@@ -94,6 +94,7 @@ int test_api(){
 	It reveals errors at runtime.
 	
 */
+#ifndef NDEBUG
 int test_topology(){
 	debug_call();
 	
@@ -111,7 +112,7 @@ int test_topology(){
 	
 	return 0;
 }
-
+#endif
 /*
 	This function tests the iterators' interface.
 */
@@ -189,6 +190,7 @@ int test_iterator(){
 	This function checks if the tree is balanced
 	after calling 'balance()'.
 */
+#ifndef NDEBUG
 int test_balance(){
 	debug_call();
 	
@@ -208,7 +210,7 @@ int test_balance(){
 
 	return 0;
 }
-
+#endif
 
 /*
 	Test 'find()' function
@@ -350,12 +352,15 @@ int main(){
 	try {
 		
 		cout << ( test_api()==0 ? "OK" : "ERROR" ) << endl;
-		cout << ( test_topology()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_iterator()==0 ? "OK" : "ERROR" ) << endl;
-		cout << ( test_balance()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_find()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_brackets()==0 ? "OK" : "ERROR" ) << endl;
 		cout << ( test_move_copy()==0 ? "OK" : "ERROR" ) << endl;
+		
+		#ifndef NDEBUG
+		cout << ( test_topology()==0 ? "OK" : "ERROR" ) << endl;
+		cout << ( test_balance()==0 ? "OK" : "ERROR" ) << endl;
+		#endif
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";

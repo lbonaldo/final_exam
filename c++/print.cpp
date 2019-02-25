@@ -12,6 +12,7 @@ std::default_random_engine G(time(NULL));
 	This function tests the topology of the tree.
 	It reveals errors at runtime.
 */
+#ifndef NDEBUG
 int test_topology(){
 	
 	map<int,int> M;
@@ -36,13 +37,15 @@ int test_topology(){
 	
 	return M.check();
 }
-
+#endif
 
 int main(){
 	
 	try {
-		
+	
+		#ifndef NDEBUG
 		test_topology();
+		#endif
 		
 	}catch(const std::exception& E){
 		cout<< E.what() << "\n";
