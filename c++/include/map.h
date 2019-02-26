@@ -89,7 +89,7 @@ class map
 		return iterator(smallest_at(root));
 	}
 
-	iterator end()noexcept {
+	iterator end()  noexcept {
 		return iterator();
 	}
 
@@ -107,11 +107,9 @@ class map
 	
 	void balance(); // O(N log N), very costly operation
 
-	iterator find(const key_type&) const noexcept;
+	iterator find(const key_type&) noexcept;
 
         auto& operator[](const key_type&);
-
-        const auto& operator[](const key_type&) const noexcept;
 
   //copy-move semantics intizialized in map.cpp
   

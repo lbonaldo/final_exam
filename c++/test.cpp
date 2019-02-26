@@ -73,7 +73,7 @@ int test_api(){
 		const map<key_example,value_example>& X = M;
 		
 		// test operator[] const
-		X[key_example(10)];
+		//X.find(key_example(10));
 		
 		// test begin() const
 		X.begin();
@@ -125,12 +125,23 @@ int test_iterator(){
 	map<int,int> M;
 	std::map<int,int> sM;
 	
+	
 	for(int i=0;i<N;i++){
 		int k=rn(G),v=rn(G);
 		 M.insert({k,v});
 		sM.insert({k,v});
 	}
 	
+	{
+		auto it=M.begin();
+		int k = it->first;
+		auto it2=M.find(k);
+		
+		if(it != it2)
+			throw test_fail("comparison of iterator fails");
+		
+	}
+
 	std::stringstream std_s, star_s,arrow_s,auto_s,const_arrow_s,const_star_s;
 	
 	for(auto x: sM)
@@ -270,7 +281,8 @@ int test_brackets(){
 	
 	if(std_s.str() != my_s.str())
 		throw test_fail("contents of map is wrong.");
-	
+
+
 	return 0;
 }
 

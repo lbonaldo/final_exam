@@ -121,12 +121,15 @@ void map<key_type,value_type>::balance()
 */
 template<class key_type, class value_type> 
 class map<key_type,value_type>::iterator
-	map<key_type,value_type>::find(const key_type& k) const noexcept 
+	map<key_type,value_type>::find(const key_type& k)  noexcept 
 {
 	auto i = search_at(k,root);
 	
-	if(i==nullptr or i->key() < k or k < i->key())
-		return iterator();
+	if(i==nullptr)
+		return end();
+		
+	if(i->key() < k or k < i->key())
+		return end();
 	
 	return iterator(i);
 }
@@ -236,15 +239,6 @@ auto& map<key_type,value_type>::operator[](const key_type& k) {
   return i->second;
 }
 
-template<class key_type, class value_type>
-const auto& map<key_type,value_type>::operator[](const key_type& k) const noexcept {
-
-   auto i = find(k);
-  
-   //if( i == end() ) throw exception 
-  
-   return i->second;
-}
 
 //copy-move semantics intizialized in map.cpp
 
