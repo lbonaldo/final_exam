@@ -265,9 +265,10 @@ map<key_type,value_type>::operator=(const map& map_source) {
 
 //move ctor
 template<class key_type, class value_type>
-map<key_type,value_type>::map(map&& map_source) noexcept : root{map_source.root}{
+map<key_type,value_type>::map(map&& map_source) 
+	noexcept : root{std::move(map_source.root)}{
 
-  map_source.root = nullptr;
+//  map_source.root = nullptr;
 }
 
 //move assigmnet
@@ -275,9 +276,9 @@ template<class key_type, class value_type>
 map<key_type,value_type>&
 map<key_type,value_type>::operator=(map&& map_source) noexcept {
 
-  clear();
-  root = map_source.root;
-  map_source.root = nullptr;
+  //clear();
+  root = std::move(map_source.root);
+  //map_source.root = nullptr;
 
   return *this;
 }
