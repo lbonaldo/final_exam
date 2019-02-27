@@ -45,8 +45,20 @@ class key_example {
 int test_api(){
 	debug_call();
 	
+	
 	map<key_example,value_example> M;
 	std::uniform_int_distribution<int> rn(1,6);
+	
+	
+	// private members:
+	// map<int,int>::node X;
+	// map<int,int>::base_iterator X;
+	// M.root;
+	//M.smallest_at(...);
+	//M.search_at(...);
+	auto it = M.begin();
+	//it.next(key_example(1));
+	//it.pnode;
 	
 	int n=10;
 
