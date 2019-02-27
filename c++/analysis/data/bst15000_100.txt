@@ -1,0 +1,200 @@
+map<int,double>: 
+Look-up time UNBALANCED MAP: 19 us Dim: 15000
+Look-up time BALANCED MAP: 19 us Dim: 15000
+Look-up time STD::MAP: 17 us Dim: 15000
+5096.72
+map<double,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 21 us Dim: 15000
+Look-up time STD::MAP: 22 us Dim: 15000
+5099.31
+map<string,double>: 
+Look-up time UNBALANCED MAP: 37 us Dim: 15000
+Look-up time BALANCED MAP: 35 us Dim: 15000
+Look-up time STD::MAP: 29 us Dim: 15000
+5105.57
+map<string,string>: 
+Look-up time UNBALANCED MAP: 69 us Dim: 15000
+Look-up time BALANCED MAP: 46 us Dim: 15000
+Look-up time STD::MAP: 42 us Dim: 15000
+24687
+map<int,double>: 
+Look-up time UNBALANCED MAP: 34 us Dim: 15000
+Look-up time BALANCED MAP: 18 us Dim: 15000
+Look-up time STD::MAP: 17 us Dim: 15000
+5104.39
+map<double,double>: 
+Look-up time UNBALANCED MAP: 37 us Dim: 15000
+Look-up time BALANCED MAP: 20 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5096.13
+map<string,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 33 us Dim: 15000
+Look-up time STD::MAP: 28 us Dim: 15000
+5093.05
+map<string,string>: 
+Look-up time UNBALANCED MAP: 64 us Dim: 15000
+Look-up time BALANCED MAP: 44 us Dim: 15000
+Look-up time STD::MAP: 38 us Dim: 15000
+24688
+map<int,double>: 
+Look-up time UNBALANCED MAP: 20 us Dim: 15000
+Look-up time BALANCED MAP: 17 us Dim: 15000
+Look-up time STD::MAP: 17 us Dim: 15000
+5095.07
+map<double,double>: 
+Look-up time UNBALANCED MAP: 36 us Dim: 15000
+Look-up time BALANCED MAP: 21 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5108.47
+map<string,double>: 
+Look-up time UNBALANCED MAP: 37 us Dim: 15000
+Look-up time BALANCED MAP: 34 us Dim: 15000
+Look-up time STD::MAP: 28 us Dim: 15000
+5099.08
+map<string,string>: 
+Look-up time UNBALANCED MAP: 68 us Dim: 15000
+Look-up time BALANCED MAP: 46 us Dim: 15000
+Look-up time STD::MAP: 41 us Dim: 15000
+24591
+map<int,double>: 
+Look-up time UNBALANCED MAP: 19 us Dim: 15000
+Look-up time BALANCED MAP: 18 us Dim: 15000
+Look-up time STD::MAP: 18 us Dim: 15000
+5101.74
+map<double,double>: 
+Look-up time UNBALANCED MAP: 36 us Dim: 15000
+Look-up time BALANCED MAP: 21 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5104.38
+map<string,double>: 
+Look-up time UNBALANCED MAP: 37 us Dim: 15000
+Look-up time BALANCED MAP: 33 us Dim: 15000
+Look-up time STD::MAP: 28 us Dim: 15000
+5101.51
+map<string,string>: 
+Look-up time UNBALANCED MAP: 67 us Dim: 15000
+Look-up time BALANCED MAP: 44 us Dim: 15000
+Look-up time STD::MAP: 39 us Dim: 15000
+24532
+map<int,double>: 
+Look-up time UNBALANCED MAP: 19 us Dim: 15000
+Look-up time BALANCED MAP: 18 us Dim: 15000
+Look-up time STD::MAP: 18 us Dim: 15000
+5098.39
+map<double,double>: 
+Look-up time UNBALANCED MAP: 36 us Dim: 15000
+Look-up time BALANCED MAP: 20 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5103.42
+map<string,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 34 us Dim: 15000
+Look-up time STD::MAP: 28 us Dim: 15000
+5102.92
+map<string,string>: 
+Look-up time UNBALANCED MAP: 67 us Dim: 15000
+Look-up time BALANCED MAP: 44 us Dim: 15000
+Look-up time STD::MAP: 39 us Dim: 15000
+24174
+map<int,double>: 
+Look-up time UNBALANCED MAP: 19 us Dim: 15000
+Look-up time BALANCED MAP: 17 us Dim: 15000
+Look-up time STD::MAP: 16 us Dim: 15000
+5097.14
+map<double,double>: 
+Look-up time UNBALANCED MAP: 36 us Dim: 15000
+Look-up time BALANCED MAP: 21 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5095.41
+map<string,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 33 us Dim: 15000
+Look-up time STD::MAP: 28 us Dim: 15000
+5102.13
+map<string,string>: 
+Look-up time UNBALANCED MAP: 67 us Dim: 15000
+Look-up time BALANCED MAP: 43 us Dim: 15000
+Look-up time STD::MAP: 39 us Dim: 15000
+24169
+map<int,double>: 
+Look-up time UNBALANCED MAP: 19 us Dim: 15000
+Look-up time BALANCED MAP: 17 us Dim: 15000
+Look-up time STD::MAP: 17 us Dim: 15000
+5106.57
+map<double,double>: 
+Look-up time UNBALANCED MAP: 35 us Dim: 15000
+Look-up time BALANCED MAP: 21 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5104.03
+map<string,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 34 us Dim: 15000
+Look-up time STD::MAP: 27 us Dim: 15000
+5102.99
+map<string,string>: 
+Look-up time UNBALANCED MAP: 67 us Dim: 15000
+Look-up time BALANCED MAP: 46 us Dim: 15000
+Look-up time STD::MAP: 44 us Dim: 15000
+24997
+map<int,double>: 
+Look-up time UNBALANCED MAP: 19 us Dim: 15000
+Look-up time BALANCED MAP: 18 us Dim: 15000
+Look-up time STD::MAP: 18 us Dim: 15000
+5093.46
+map<double,double>: 
+Look-up time UNBALANCED MAP: 49 us Dim: 15000
+Look-up time BALANCED MAP: 21 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5105.66
+map<string,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 33 us Dim: 15000
+Look-up time STD::MAP: 28 us Dim: 15000
+5100.65
+map<string,string>: 
+Look-up time UNBALANCED MAP: 64 us Dim: 15000
+Look-up time BALANCED MAP: 44 us Dim: 15000
+Look-up time STD::MAP: 38 us Dim: 15000
+24134
+map<int,double>: 
+Look-up time UNBALANCED MAP: 20 us Dim: 15000
+Look-up time BALANCED MAP: 18 us Dim: 15000
+Look-up time STD::MAP: 17 us Dim: 15000
+5110.61
+map<double,double>: 
+Look-up time UNBALANCED MAP: 37 us Dim: 15000
+Look-up time BALANCED MAP: 20 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5092.82
+map<string,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 34 us Dim: 15000
+Look-up time STD::MAP: 28 us Dim: 15000
+5099.77
+map<string,string>: 
+Look-up time UNBALANCED MAP: 64 us Dim: 15000
+Look-up time BALANCED MAP: 44 us Dim: 15000
+Look-up time STD::MAP: 39 us Dim: 15000
+24873
+map<int,double>: 
+Look-up time UNBALANCED MAP: 18 us Dim: 15000
+Look-up time BALANCED MAP: 18 us Dim: 15000
+Look-up time STD::MAP: 18 us Dim: 15000
+5104.82
+map<double,double>: 
+Look-up time UNBALANCED MAP: 36 us Dim: 15000
+Look-up time BALANCED MAP: 33 us Dim: 15000
+Look-up time STD::MAP: 21 us Dim: 15000
+5095.87
+map<string,double>: 
+Look-up time UNBALANCED MAP: 38 us Dim: 15000
+Look-up time BALANCED MAP: 35 us Dim: 15000
+Look-up time STD::MAP: 29 us Dim: 15000
+5098.7
+map<string,string>: 
+Look-up time UNBALANCED MAP: 68 us Dim: 15000
+Look-up time BALANCED MAP: 44 us Dim: 15000
+Look-up time STD::MAP: 38 us Dim: 15000
+24154
